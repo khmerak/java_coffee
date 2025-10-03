@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+
+<head th:replace="~{base::head}">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div th:replace="~{base::navbar(reservation='active')}"></div>
+
+  <!-- Header -->
+  <div th:replace="~{base::header(text='Order & Reservation')}"></div>
+
+  <!-- Reservation / Order Start -->
+  <div class="container-fluid py-5">
+    <div class="container">
+      <div class="reservation position-relative overlay-top overlay-bottom">
+        <div class="row align-items-center">
+          <!-- Left promo -->
+          <div class="col-lg-6 my-5 my-lg-0">
+            <div class="p-5">
+              <div class="mb-4">
+                <h1 class="display-3 text-primary">30% OFF</h1>
+                <h1 class="text-white">For Online Cake Orders</h1>
+              </div>
+              <p class="text-white">
+                Freshly baked cakes, cupcakes, and pastries made to order.
+                Save when you place your order online and pick up in-store.
+              </p>
+              <ul class="list-inline text-white m-0">
+                <li class="py-2">
+                  <i class="fa fa-check text-primary mr-3"></i>
+                  Custom designs & messages
+                </li>
+                <li class="py-2">
+                  <i class="fa fa-check text-primary mr-3"></i>
+                  Same-day pickup on select items
+                </li>
+                <li class="py-2">
+                  <i class="fa fa-check text-primary mr-3"></i>
+                  100% fresh ingredients
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right form -->
+          <div class="col-lg-6" th:fragment="book">
+            <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+              <h1 class="text-white mb-4 mt-5">Order Your Cake</h1>
+
+              <form th:object="${booked}" th:action="@{/success}" method="post" class="mb-5">
+                <div class="form-group">
+                  <input th:field="*{name}" type="text"
+                         class="form-control bg-transparent border-primary p-4"
+                         placeholder="Full name" required="required"/>
+                </div>
+
+                <div class="form-group">
+                  <input th:field="*{email}" type="email"
+                         class="form-control bg-transparent border-primary p-4"
+                         placeholder="Email address" required="required"/>
+                </div>
+
+                <div class="form-group">
+                  <input th:field="*{phoneNumber}" type="tel"
+                         class="form-control bg-transparent border-primary p-4"
+                         placeholder="Phone number" required="required"/>
+                </div>
+
+                <div class="form-group">
+                  <div class="date" id="date" data-target-input="nearest">
+                    <input type="text" th:field="*{date}"
+                           class="form-control bg-transparent border-primary p-4 datetimepicker-input"
+                           placeholder="Pickup date" data-target="#date" data-toggle="datetimepicker"/>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="time" id="time" data-target-input="nearest">
+                    <input type="text" th:field="*{time}"
+                           class="form-control bg-transparent border-primary p-4 datetimepicker-input"
+                           placeholder="Pickup time" data-target="#time" data-toggle="datetimepicker"/>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <select th:field="*{person}"
+                          class="custom-select bg-transparent border-primary px-4"
+                          style="height: 49px;">
+                    <option value="">Guests / Servings</option>
+                    <option value="1">1 serving</option>
+                    <option value="2">2 servings</option>
+                    <option value="3">3 servings</option>
+                    <option value="4">4 servings</option>
+                    <option value="5">5 servings</option>
+                    <option value="6">6 servings</option>
+                    <option value="7">7 servings</option>
+                    <option value="8">8 servings</option>
+                  </select>
+                </div>
+
+                <div>
+                  <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">
+                    Place Order
+                  </button>
+                </div>
+              </form>
+
+              <!-- Optional: small helper text -->
+              <p class="text-white-50 mb-0" style="font-size: .9rem;">
+                Need a custom size or flavor? Contact us after submitting your order.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Reservation / Order End -->
+
+  <!-- Footer -->
+  <div th:replace="~{base::footer}"></div>
+
+  <!-- Back to Top & Scripts -->
+  <div th:replace="~{base::script}"></div>
+</body>
+</html>
